@@ -1,0 +1,47 @@
+﻿[
+  {
+    "id": 0,
+    "application": "Tracker",
+    "reviewDate": "2016-07-15T07:15:40 +05:00",
+    "releaseDate": "2017-11-24T12:40:00 +06:00",
+    "approver1": "Freda Quinn",
+    "approver2": "Marlene Santiago",
+    "status": "InProg"
+  },
+  {
+    "id": 1,
+    "application": "Dashboard",
+    "ReviewDate": "2017-02-10T01:53:12 +06:00",
+    "ReleaseDate": "2017-06-10T12:02:17 +05:00",
+    "approver1": "Jackson Burnett",
+    "approver2": "Tommie Klein",
+    "status": "InProg"
+  },
+  {
+    "id": 2,
+    "application": "ToDoApp",
+    "ReviewDate": "2015-12-30T08:30:07 +06:00",
+    "ReleaseDate": "2016-05-23T12:31:14 +05:00",
+    "approver1": "Dana Hensley",
+    "approver2": "Middleton Boyd",
+    "status": "Approved"
+  },
+  {
+    "id": 3,
+    "application": "Dashboard",
+    "ReviewDate": "2017-08-01T06:14:42 +05:00",
+    "ReleaseDate": "2017-07-24T12:40:07 +05:00",
+    "approver1": "Townsend Stanley",
+    "approver2": "Ethel Acosta",
+    "status": "InProg"
+  },
+  {
+    "id": 4,
+    "application": "Dashboard",
+    "ReviewDate": "2019-08-18T01:57:10 +05:00",
+    "ReleaseDate": "2020-08-05T04:35:04 +05:00",
+    "approver1": "Hendrix Carson",
+    "approver2": "Cathryn Rice",
+    "status": "Released"
+  }
+]

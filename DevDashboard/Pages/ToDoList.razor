@@ -1,0 +1,60 @@
+﻿@page "/todolist"
+@inject HttpClient Http
+
+<PageTitle>To Do List</PageTitle>
+
+<h1>To Do List</h1>
+
+
+@if (toDoItems == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Task</th>
+                <th>Assigned To</th>
+                <th>Date Due</th>
+                <th>Status</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var toDoItem in toDoItems)
+            {
+            <tr>
+                <td>@toDoItem.Task</td>
+                <td>@toDoItem.Owner</td>
+                <td>@toDoItem.DateDue</td>
+                <td>@toDoItem.Status</td>
+                <td>@toDoItem.Comments</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    public enum ToDoStatus { Open, Complete, Withdrawn }
+    private ToDoItem[]? toDoItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        toDoItems = await Http.GetFromJsonAsync<ToDoItem[]>("sample-data/todo.json");
+    }
+
+    public class ToDoItem
+    {
+        public int ID { get; set; }
+        public string Task { get; set; }
+        public string Owner { get; set; }
+        public string Comments { get; set; }
+        public string Status { get; set; }  // ToDo Convert to Enum.
+        public DateTime DateTimeAdded { get; set; }
+        public string DateDue { get; set; } // ToDo Convert to DateTime.
+        public DateTime DateTimeCompleted { get; set; }
+    }
+}

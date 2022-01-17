@@ -1,0 +1,43 @@
+﻿@page "/codereviews"
+@inject HttpClient Http
+
+<PageTitle>Code Reviews</PageTitle>
+
+<h1>Code Reviews</h1>
+
+@if (codeReviews == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Application</th>
+                <th>Review Date</th>
+                <th>Release Date</th>
+                <th>Contains SQL</th>
+                <th>Approver 1</th>
+                <th>Approver 2</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (CodeReview a in codeReviews)
+            {
+                <tr>
+                    <td>@a.ID</td>
+                    <td>@a.Application</td>
+                    <td>@a.ReviewDate</td>
+                    <td>@a.ReleaseDate</td>
+                    <td>@a.ContainsSQL</td>
+                    <td>@a.Approver1</td>
+                    <td>@a.Approver2</td>
+                    <td>@a.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
