@@ -1,18 +1,30 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@inject IJSRuntime JS;
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">Dashboard</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
+
 </div>
 
 <div class="navDiv @NavMenuCssClass">
-    <ul class="nav flex-column" style="text-align:end !important;">
-        <li class="nav-item px-3 navBtns">
+    <ul class="nav" style="text-align:end !important;">
+
+        <li class="nav-item px-3 navBtns" style=" margin-top: -13px;">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <label class="navLbl">Best Practices</label>
+                <label class="navLbl">Home</label>
                 <span class="oi oi-home" aria-hidden="true"></span>
             </NavLink>
         </li>
+
+        <li class="nav-item px-3 navBtns">
+            <NavLink class="nav-link" href="bestpractices">
+                <label class="navLbl">Best Practices</label>
+                <span class="oi oi-plus" aria-hidden="true"></span>
+            </NavLink>
+        </li>
+
 
         <li class="nav-item px-3 navBtns">
             <NavLink class="nav-link" href="codereviews">
@@ -41,7 +53,15 @@
                 <span class="oi oi-lightbulb" aria-hidden="true"></span>
             </NavLink>
         </li>
+
+        <li class="nav-item px-3 navBtns">
+             <div class="nav-link buttonAsNavlink" @onclick="Alert">
+                <label class="navLbl">About</label>
+                <span class="oi oi-lightbulb" aria-hidden="true"></span>
+            </div>
+        </li>
     </ul>
+
 </div>
 
 @code {
@@ -52,5 +72,14 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    const string message = "null reply"; //TO DO: Find out why Invoking JS Requires input?
+
+    private string[] args = { message };
+
+    private async Task Alert()
+    {
+        await JS.InvokeAsync<string>("showAbout", args); //This is an easy way to call JS method
     }
 }
