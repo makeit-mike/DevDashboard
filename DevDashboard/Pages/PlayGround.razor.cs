@@ -26,11 +26,11 @@ namespace DevDashboard.Pages
                 //                            .ToArray();
                 //formalName = string.Join(" ", individualNames);
 
-                formalName = string.Join(" ",
-                                            formalName
-                                            .Split(' ')
-                                            .Select(s => s.ToProperNoun())
-                                            .ToArray());
+                formalName = formalName
+                                .Split(' ')
+                                .Select(s => s.ToProperNoun())
+                                .ToArray()
+                                .Join();
 
                 //string[] individualNames = formalName.Split(' ').Select(x => x.ToProperNoun).ToArray();
                 //var properIndividualNames = individualNames.Select(x => x.ToProperNoun);

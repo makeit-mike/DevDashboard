@@ -34,6 +34,21 @@ namespace DevDashboard.Classes
             }
         }
 
+        public static string Join(this object[] input, string delemiter = " ")
+        {
+            try
+            {
+                if (input == null || input.Length == 0)
+                {
+                    return null; 
+                }
 
+                return string.Join(delemiter, input);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }
