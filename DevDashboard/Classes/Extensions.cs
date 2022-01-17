@@ -21,5 +21,17 @@ namespace DevDashboard.Classes
                 return noun;
             }
         }
+
+        public static int? ToOptionalInt(this string input, int? defualt = null)
+        {
+            try
+            {
+                return input is null || input.Length == 0 ? defualt : Convert.ToInt32(input);
+            }
+            catch
+            {
+                return defualt;
+            }
+        }
     }
 }
