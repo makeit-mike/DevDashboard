@@ -24,5 +24,27 @@ namespace DevDashboard.Pages
             public string DateDue { get; set; } // ToDo Convert to DateTime.
             public DateTime DateTimeCompleted { get; set; }
         }
+
+        public void AddToDoItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateToDoItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveToDoItem()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SendNotification()
+        {
+            throw new NotImplementedException();
+            // ToDo: Possibly link to a Notification Service that dynamically builds the emails.
+            // Ideally code should match CodeReviews, and be a simple method call.
+        }
     }
 }
