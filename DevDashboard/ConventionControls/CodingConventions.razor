@@ -1,0 +1,188 @@
+﻿@* 
+        DO NOT FORMAT THIS DOCUMENT.
+        I have a code formatter that is looking for tabbing and spaces to know how to format this document
+        If this document auto-formats on paste or save, perform 1 undo action to undo the formatting. 
+*@
+<br />
+<button id="btnCoding" @onclick="@btnCoding_OnClick" class="btn btn-dark btn-lg buttonConventions" >Coding Conventions</button>
+<div class="Conventions" hidden="@showCoding">
+    <br />
+    <h3>String Interpolation/Formatting/Concatting</h3>
+    <ul>
+        <li>Generally, anything that works is fine.</li>
+        <li>RegEx is generally not as useful or readable as formatting the string with code. Unless there is no other way to do it.</li>
+        <li>Chaining strings with the + operator is VERY ineffecient, but most of the time it is simpler to write.</li>
+        <li>The alternative to concating a string with + is to use a StringBuilder, which is much more effecient on large strings (like email bodies).</li>
+        <li>Use 'string' instead of 'String' as string is a built in data type with C#, and we do not need to call the class String.</li>
+    </ul>
+    <CodeSnippet>
+        // string.format will replace all instances of {index} with strings that are comma seperated to the right.
+        string myString = string.Format("Value 1: {0}, Value 2: {1}", val1, val2);
+
+        // You can also use $"" to insert variables inside the quotes of your string.
+        // Use this version of string interpolation when you are working with simple/short strings.
+        mystring = $"Value 1: {val1}, Value 2: {val2}";
+
+
+        var phrase = "lalalalalalalalalalalalalalalalalalalalalalalalalalalalalala";
+        var manyPhrases = new StringBuilder();
+        for (var i = 0; i &lt; 10000; i++)
+        {
+            manyPhrases.Append(phrase); //Using += on a normal string here would cause major issues, as it completey rebuilds and copies over your string object everytime.
+        } 
+
+    </CodeSnippet>
+    <h3>the var keyword</h3>
+
+    <p>C# is statically typed, meaning when you code 'var x = 12;', x will ALWAYS have to behave like a 32 bit Integer.</p>
+    <p>This is unlike JavaScript, where var x = 12; can be reassigned to "string content" on the fly.</p>
+
+    <ul>
+        <li>var usage is encouraged anytime it aids readability to other coders.</li>
+        <li>camelCase- local variables, fields, parameters, controls, control commands</li>
+        <li>UpperCase- Method names, Class names, Namespaces, Files, Folders </li>
+
+    </ul>
+    <CodeSnippet>
+        //GOOD
+        var apple = new Apple();        //It is very obvious what this apple object is.
+        var request = Factory.Create&lt;HttpRequest&gt;(); //here the actual object type would be unuseful for the coder/reviewer.
+
+        //BAD
+        var success = true;                                 //if the variable is a basic type, you might as well dictate the type. Var is only adding complexity in this case.
+        var number = 12 * SomeMethodThatReturnsFloat();     //At a quick glance the reviewer would need to decide "is this supposed to be an int or a float?"
+        var myList = GetListOfItems();                      //Is this a list of strings? list of item objects? Or is it an Array? there is no way to know at a glance.
+    </CodeSnippet>
+
+    <h3>Array basics (and more on var)</h3>
+    <CodeSnippet>
+        // Preferred syntax. Note that you cannot use var here instead of string[].
+        string[] vowels1 = { "a", "e", "i", "o", "u" };
+
+        // If you use explicit instantiation, you can use var.
+        var vowels2 = new string[] { "a", "e", "i", "o", "u" };
+
+        // If you specify an array size, you must initialize the elements one at a time.
+        var vowels3 = new string[5];
+        vowels3[0] = "a";
+        vowels3[1] = "e";
+        // And so on.
+
+        //If the size is not static, use List&lt;string&gt;() instead.
+    </CodeSnippet>
+
+    <h3>Try Catches</h3>
+    <CodeSnippet>
+        //ALL Methods or Events must be in a Try Catch.
+        //In a Method:
+        static string GetValueFromArray(string[] array, int index)
+        {
+            try
+            {
+                return array[index];
+            }
+            catch (System.IndexOutOfRangeException ex)
+            {
+                //Do whatever you need to with the expected behavior.
+            }
+            catch (Exception ex)
+            {
+                //Log the Error.
+            }
+        }
+
+        //In an Event
+        // Notice, this event did not have a try catch, because ALL business logic for this click
+        // event is in a try catch above.
+        protected void btnGetValueFromArray_Click(object sender, EventArgs e)
+        {
+            GetValueFromArray(myArray, btnGetValueFromArray.ID); 
+        }
+
+        //However.. we generally want to flip this
+
+        //This is much more Functional, this method only does 1 thing now.
+        static string GetValueFromArray(string[] array, int index)
+        {
+            return array[index];
+        }
+
+        //And here, we are trying to do a button click instead of just calling a method, and hoping the method has a try catch.
+        protected void btnGetValueFromArray_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GetValueFromArray(myArray, btnGetValueFromArray.ID); 
+            }
+            catch (System.IndexOutOfRangeException ex)
+            {
+                //Do whatever you need to with the expected behavior.
+            }
+            catch (Exception ex)
+            {
+                //Log the Error.
+            }
+        }
+
+    </CodeSnippet>
+
+
+    <h3>Conditional blocks and Operators</h3>
+    <CodeSnippet>
+        // & vs &&, | vs ||
+        if (bool1 & bool2)
+        {
+            //always checks both conditions
+        }
+        if (bool1 && bool2)
+        {
+            //Only checks the next condition if the first condition is true
+            //Meaning.. it would be effecient to order conditions in order of quickest to execute/check and have slowest conditions ran ONLY if everything prior was true
+        }
+
+        //However there are valid uses to | and &
+        Console.WriteLine(7 & 4); // prints 4
+        Console.WriteLine(6 | 8); // prints 14
+        Console.WriteLine(6 && 8); // does not compile as must be related to two boolean vales and produces a bool
+        Console.WriteLine(6 || 8); // does not compile as must be related to two boolean vales and produces a bool
+        /*
+            & is a bitwise AND operation
+            | is a bitwise OR operation
+            && is a logical AND
+            || is a logical OR
+        */
+
+        //Basically only use & and | if you know exactly why and what you are doing. like translating ASCII or performing very quick newton method aproximations. 
+    </CodeSnippet>
+
+    <h3>SQL Method Calls (USING)</h3>
+    <p>SQLConnections are pooled by .NET so they are generally non-expensive to rebuild every time they are needed.
+        Where this becomes a problem is when a connection is not closed (this can cause many problems, most notably decrease in speed and security).
+     </p>
+    <CodeSnippet>
+        using (SqlConnection conn = new SqlConnection(...))
+        {
+            using(SqlCommand cmd = new SqlCommand(..., conn))
+            {
+                conn.Open();
+                using(DataReader dr = cmd.ExecuteReader())  // or load a DataTable, ExecuteScalar, etc.    
+                {
+                        ...
+                {
+                conn.Close(); //This isnt *needed* since anything in a USING statement is always Disposed of when the program leaves that scope
+            }
+        } // At this point in the program, anything local inside this call is disposed, including the open connection.
+    </CodeSnippet>
+
+
+    <h3> LINQ Queries</h3>
+</div>
+
+
+@code {
+    private bool showCoding { get; set; } = true;
+    private void btnCoding_OnClick()
+    {
+        showCoding = !showCoding;
+    }
+}

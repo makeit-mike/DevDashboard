@@ -1,0 +1,56 @@
+﻿   
+@* 
+        DO NOT FORMAT THIS DOCUMENT.
+        I have a code formatter that is looking for tabbing and spaces to know how to format this document
+        If this document auto-formats on paste or save, perform 1 undo action to undo the formatting. 
+*@
+<br />
+<button id="btnShow" @onclick="@btnShow_OnClick" class="btn btn-dark btn-lg buttonConventions" >Switch Case Snippets</button>
+<div class="Conventions" hidden="@show">
+<br />   
+<h3> Switch Case Snippets </h3>
+    <CodeSnippet>
+    // Set variable with switch without formal switch statement.
+    // Standard
+    string finalValue;
+    string myString = "test";
+    switch (myString)
+    {
+        case "not test":
+            finalValue = "Production";
+            break;
+        case "test":
+        default:
+            break;
+    }
+    //standard as lamda (preferred when assigning)
+    var resultText = switchValue switch
+    {
+        var x when
+            x == 1 ||
+            x == 2 ||
+            x == 3 => "one to three",
+        4 => "four",
+        5 => "five",
+        _ => "unknown",
+    };
+    //More consise with normal 'if' conditions. (More dependent on up to date projects)
+    var resultText = switchValue switch
+    {
+        var x when x > 0 && x &lt; 4 => "one to three",
+        4 => "four",
+        5 => "five",
+        _ => "unknown",
+    };
+
+    </CodeSnippet>
+
+    </div>
+
+@code{
+    bool show { get; set; } = true;
+    void btnShow_OnClick()
+    {
+        show = !show;
+    }
+}

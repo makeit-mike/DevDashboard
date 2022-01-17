@@ -1,0 +1,143 @@
+﻿   
+@* 
+        DO NOT FORMAT THIS DOCUMENT.
+        I have a code formatter that is looking for tabbing and spaces to know how to format this document
+        If this document auto-formats on paste or save, perform 1 undo action to undo the formatting. 
+*@
+<br />
+<button id="btnShow" @onclick="@btnShow_OnClick" class="btn btn-dark btn-lg buttonConventions" >SQL Method Snippets</button>
+<div class="Conventions" hidden="@show">
+    <br />   
+ <h3>SQL Snippets</h3>
+    <p class="conventionExplanation">
+    With SQL Methods, there are many many ways to get the exact same result, however there are a few good rules to live by:
+        
+    </p>
+    <ul style="max-width: 700px;">
+        <li>Abstarct and Encrypt ALL sql connections. (you will see below that new SqlConnection() NEVER passes in anything as a plaintext string. 
+        As to how you go about this is personal preference or your teams decision. 
+        There isn't any best practice on this.)</li>
+        <li>wrap everything using a connection in 'Using (connection)'</li>
+        <li>wrap the command inside the connection in 'Using (command)'</li>
+        <li>Only open the connection right before accessing data, and make a good habit of manually closing the connection as soon as you are done using the connection.</li>
+        <li>Do not connect to SQL (or any other data sensitive content) when the data is soley Client Facing (Blazor WASM, JS, etc). 
+            Only make external connections via an API, or by using a Server-Side approach in website building.</li>
+    </ul>
+    <CodeSnippet>
+    using System.Data;
+    using System.Data.SqlClient;
+    using (SqlConnection con = new SqlConnection(dc.Con)) 
+    {
+        using (SqlCommand cmd = new SqlCommand("sp_Add_contact", con)) 
+        {
+          cmd.CommandType = CommandType.StoredProcedure;
+
+          cmd.Parameters.Add("@@FirstName", SqlDbType.VarChar).Value = txtFirstName.Text;
+          cmd.Parameters.Add("@@LastName", SqlDbType.Int).Value = txtLastName.Text;
+
+          con.Open();
+          cmd.ExecuteNonQuery();
+          con.Close();
+        }
+    }
+    //SQL Command GET DataTable
+    internal static void GetDataTableFromSQL()
+    {
+        DataTable dt = new DataTable();
+        using (SqlConnection con = new SqlConnection(constring))
+        {
+            using (SqlCommand cmd = new SqlCommand("sp_Add_contact", con)) 
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@@FirstName", SqlDbType.VarChar).Value = txtFirstName.Text;
+                cmd.Parameters.Add("@@LastName", SqlDbType.Int).Value = txtLastName.Text;
+                con.Open();
+                using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
+                {
+                    sda.Fill(dt);
+                }
+                con.Close();
+            }
+        }
+        return dt;
+    }
+    internal static string GetOutputFromSQL()
+    {
+        string output = "";
+        using (SqlConnection con = new SqlConnection(constring))
+        {
+            using (SqlCommand cmd = new SqlCommand("sp_Add_contact", con))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@@FirstName", SqlDbType.VarChar).Value = txtFirstName.Text;
+                cmd.Parameters.Add("@@LastName", SqlDbType.Int).Value = txtLastName.Text;
+                cmd.Parameters["@@SomeOutput"].Direction = ParameterDirection.Output;
+                con.Open();
+                cmd.ExecuteNonQuery();
+                output = cmd.Parameters["@@SomeOutput"].Value.ToString();
+                // Other ways of retrieving an output param:
+                //int myInt = Convert.ToInt32(cmd.Parameters["@@SomeOutput"].Value); //Throws exception if NULL or not an INT/TinyInt/All number VARCHAR value
+                //int? myOptionalInt = (int?)(cmd.Parameters["@@SomeOutput"].Value); //Throws exception if not an INT/TinyInt/All number/empty VARCHAR value
+                //bool myBool = (bool)(cmd.Parameters["@@SoumeOutput"].Value);       //Throws exception if NULL or not a bit value
+                //bool? myOptBool = (bool?)(cmd.Parameters["@@SoumeOutput"].Value);  //Throws exception if not a bit value
+                try { output = output.Replace("&amp;nbsp;",""); } catch {}
+                con.Close();
+            }
+        }
+        return output;
+    }
+
+
+    // Returning multiple values from an SP with multiple Output Params 
+    string clientGuid = "";
+    string clientName = "";
+    DateTime dateCreated = null;
+    private Tuple&lt;string, string, DateTime> StoredProcWithOutPutParameter(int clientId)  
+    {  
+        using (SqlConnection conn = new SqlConnection(constring))
+        {
+            using (SqlCommand cmd = new SqlCommand("sp_GetClientDetails", con))
+            {
+       
+                cmd.Parameters.AddWithValue("@@ClientID", clientId);  
+              
+                cmd.Parameters.Add("@@Guid", SqlDbType.VarChar, 100);  
+                cmd.Parameters["@@Guid"].Direction = ParameterDirection.Output;  
+                cmd.Parameters.Add("@@ClientName", SqlDbType.VarChar, 100);  
+                cmd.Parameters["@@ClientName"].Direction = ParameterDirection.Output;  
+                cmd.Parameters.Add("@@DateCreated", SqlDbType.DateTime, 20);  
+                cmd.Parameters["@@DateCreated"].Direction = ParameterDirection.Output;             
+                try  
+                {  
+                    conn.Open();  
+                    int i = cmd.ExecuteNonQuery();  
+                    //Storing the output parameters value in 3 different variables.  
+                    clientGuid = Convert.ToString(cmd.Parameters["@@Guid"].Value);  
+                    clientName = Convert.ToString(cmd.Parameters["@@ClientName"].Value);  
+                    dateCreated = Convert.ToDateTime(cmd.Parameters["@@DateCreated"].Value);  
+                    // Here we get all three values from database in above three variables.  
+                }  
+                catch (Exception ex)  
+                {  
+                    // throw the exception  
+                }  
+                finally  
+                {  
+                    conn.Close();  
+                }
+                return new Tuple&lt;string, string, DateTime>(clientGuid, clientName, dateCreated); 
+            }
+        }
+    }
+</CodeSnippet>
+</div>
+
+@code{
+    bool show { get; set; } = true;
+    void btnShow_OnClick()
+    {
+        show = !show;
+    }
+}

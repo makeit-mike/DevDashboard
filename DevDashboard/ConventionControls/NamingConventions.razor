@@ -1,0 +1,40 @@
+﻿@* 
+        DO NOT FORMAT THIS DOCUMENT.
+        I have a code formatter that is looking for tabbing and spaces to know how to format this document
+        If this document auto-formats on paste or save, perform 1 undo action to undo the formatting. 
+*@
+<br />
+<button id="btnNaming" @onclick="@btnNaming_OnClick" class="btn btn-dark btn-lg buttonConventions" >Naming Conventions</button>
+<div class="Conventions" hidden="@showNaming">
+    <br />
+    <ul>
+        <li>Use descriptive names that explicitly explain what something does</li>
+        <li>camelCase- local variables, fields, parameters, controls, control commands</li>
+        <li>UpperCase- Method names, Class names, Namespaces, Files, Folders </li>
+
+    </ul>
+    <CodeSnippet>
+        //GOOD
+        var currentPerformanceCounterCategory = new System.Diagnostics.PerformanceCounterCategory();
+
+        public static void btnAddToCart_OnClick(sender, args)
+        {
+            UpdateCart(1);
+        }
+
+        public static void UpdateCart(int numberOfItems)
+        {
+            //some void functionality
+        }
+        //BAD (x does nothing but say "I'm lazy" or "I don't know what I am doing")
+        var x = 32.4;
+        public static   void update     //random amount of spaces? compiles fine but looks inconsistent
+    </CodeSnippet>
+</div>
+@code {
+    private bool showNaming { get; set; } = true;
+    private void btnNaming_OnClick()
+    {
+        showNaming = !showNaming;
+    }
+}

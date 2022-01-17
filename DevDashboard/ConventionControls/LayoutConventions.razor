@@ -1,0 +1,88 @@
+﻿@* 
+        DO NOT FORMAT THIS DOCUMENT.
+        I have a code formatter that is looking for tabbing and spaces to know how to format this document
+        If this document auto-formats on paste or save, perform 1 undo action to undo the formatting. 
+*@
+<br />
+<button id="btnLayout" @onclick="@btnLayout_OnClick" class="btn btn-dark btn-lg buttonConventions" >Layout Conventions</button>
+<div class="Conventions" hidden="@showLayout">
+    <br />
+    <ul>
+        <li>Only one statement per line</li>
+        <li>Befriend curly braces </li>
+        <li>Do not have large sections of empty lines</li>
+        <li>Use one blank line max between important declarations and methods</li>
+        <li>In most cases, column limit should not exceed 100 characters</li>
+        <li>use a space after if/for/foreach/while/... and after commas</li>
+        <li>avoid use of Hungarian naming scheme: int iValue = 2; string strCaller = "John";</li>
+        <li>Instead, use descriptive naming: int degreeFarenheight = 2; string lastCaller = "John";</li>
+    </ul>
+    <CodeSnippet>
+        namespace MyNamespace { ... }                       // Namespaces are PascalCase.
+
+        const int MyInt= 3;                                 // Constants have no real set case. But I feel PascalCase is good.
+
+        public interface IMyInterface { ... }               // Interfaces start with 'I'
+
+        public enum MyEnum {                                // Enumerations are PascalCase.
+            Yes,                                            // Enumerators are PascalCase.
+            No,                                             // Enumerators are indented.
+        }
+
+        public class MyClass { ... }                        // Classes are PascalCase.
+        public int Foo = 0;                                 // Public member variables are PascalCase.
+        int bar = 1;                                        // Local member variables are camelCase.
+
+        class MyClassName
+        {
+            int param1 {get; set;}
+        }
+        //Line breaks before new methods/functions/classes are recommended.
+        MyClassName myClassName = new MyClassName()         // Class objects are the class name as camelCase.
+        {
+            param1 = 21         //how to set class objects on initialization.
+        };
+
+
+        int[] myIntArr = { 1, 2, 3, 4, };                   //When you know the objects in an array, use this simplified constructor.
+
+        if (result != null)                                 //Use proper spacing on condition blocks
+        {
+            ...
+        }
+        else if (result == true)                            //No line breaks between conditions.
+        {
+            ... 
+        }
+
+        int myCondition = myBool ? 1 : 0;                           //inline ternary operators are encouraged when setting static values
+
+        //BAD! this inline declaration is doing too much work. This is hard to code review.
+        int myUserID = DoesAccountExist() == false ? Convert.ToInt32(AddAccountAndReturnID(myUserName).ToString()) : Convert.ToInt32(GetUserID(myUserName).ToString());
+
+        Func&lt;int, int&gt; increment = x => x + 1;                //inline lambdas should not use brackets or braces for easy reading.
+
+
+        Func&lt;int, int, long&gt; difference1 = (x, y) => {        //complex lambdas should use brackets, braces, and indentation.
+            long diff = (long)x - y;
+            return diff >= 0 ? diff : -diff;
+        };
+
+        //Avoid naming anything over 20 characters.   //Comments for a method should be placed above the method
+        void AVeryLongAndUnpleasantMethodNameMayBeDescriptiveButIsNotHelpful(int myInt)
+        {
+            //comments describing inner functionality shoud go above the line it is describing.
+            int? myNullableInt = myInt;     //for short desc, inline is okay as well.
+            ...
+        }
+    </CodeSnippet>
+</div>
+
+@code {
+    private bool showLayout { get; set; } = true;
+    private void btnLayout_OnClick()
+    {
+        showLayout = !showLayout;
+    }
+
+}

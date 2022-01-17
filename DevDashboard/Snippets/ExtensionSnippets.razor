@@ -1,0 +1,61 @@
+﻿   
+@* 
+        DO NOT FORMAT THIS DOCUMENT.
+        I have a code formatter that is looking for tabbing and spaces to know how to format this document
+        If this document auto-formats on paste or save, perform 1 undo action to undo the formatting. 
+*@
+<br />
+<button id="btnShow" @onclick="@btnShow_OnClick" class="btn btn-dark btn-lg buttonConventions" >Extension Snippets</button>
+<div class="Conventions" hidden="@show">
+    <br />
+<h3>How to create an Extension method</h3>
+    <p class="conventionExplanation" title="From official MS Docs">
+    Extension methods enable you to "add" methods to existing types without creating a new derived type, recompiling, or otherwise modifying the original type.
+    Extension methods are static methods, but they're called as if they were instance methods on the extended type. 
+    For client code written in C#, F# and Visual Basic, there's no apparent difference between calling an extension method and the methods defined in a type.
+    </p>
+    <CodeSnippet>
+        public static class Extensions // Must be static
+        {
+            public static string ToProperNoun(this string noun) //
+            {
+                // Up to dev preference, sometimes it's GOOD/Preferred for your program to crash if a method is not ran under correct 
+                // scenarios; however, I am generally of the opinion to always have a safe fall back on any method (try catches or base case ifs)
+                // so that everything else in the program can continue to function.
+                try
+                {
+                    return (noun.Length > 1) ? $"{noun[0].ToString().ToUpper()}{noun[1..]}" : noun.ToUpper();
+                }
+                catch
+                {
+                    return noun;
+                }
+            }
+        }
+
+        //Usage
+        string myString = "michael";
+        myString = myString.ToProperNoun(); 
+        
+        //OUTPUT: Michael
+
+        //Taking a splittable string, and capitalizing every first letter, then rejoining the results:
+        //(This also functions as an example of LINQ and also the basics behind Lambda functions)
+        string formalName = "michael jones";
+        formalName = string.Join(" ",                       
+                                    formalName.Split(' ')
+                                    .Select(s => s.ToProperNoun())
+                                    .ToArray()); 
+
+        //OUTPUT: Michael Jones
+    </CodeSnippet>
+
+    </div>
+
+@code{
+    bool show { get; set; } = true;
+    void btnShow_OnClick()
+    {
+        show = !show;
+    }
+}
