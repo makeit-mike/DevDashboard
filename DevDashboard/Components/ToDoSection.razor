@@ -1,0 +1,26 @@
+﻿
+<div class="ToDoBlock">
+    <div class="ToDoHr">@Header</div>
+    @foreach (var item in Items)
+    {
+        <div class="ToDoPanel">
+            <div class="ToDoHeader">
+                <p class="ToDoText">@item.Task</p>
+            </div>
+            <div class="ToDoBody">
+                <p class="ToDoText">@item.Owner</p>
+                <p class="ToDoText">@item.Status</p>
+            </div>
+        </div>
+        <br />
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public ToDoItem[] Items { get; set; }
+
+    [Parameter]
+    public string Header { get; set; }
+}

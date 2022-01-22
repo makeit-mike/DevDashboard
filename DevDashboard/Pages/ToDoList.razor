@@ -6,33 +6,16 @@
 <h1>To Do List</h1>
 
 
-@if (toDoItems == null)
+@if (Items_All == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Task</th>
-                <th>Assigned To</th>
-                <th>Date Due</th>
-                <th>Status</th>
-                <th>Comments</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var toDoItem in toDoItems)
-            {
-            <tr>
-                <td>@toDoItem.Task</td>
-                <td>@toDoItem.Owner</td>
-                <td>@toDoItem.DateDue</td>
-                <td>@toDoItem.Status</td>
-                <td>@toDoItem.Comments</td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    <div class="ToDoContainer">
+        <DevDashboard.Components.ToDoSection Header="To Do" Items=Items_ToDo />
+        <DevDashboard.Components.ToDoSection Header="In Progress" Items=Items_InProg />
+        <DevDashboard.Components.ToDoSection Header="Complete" Items=Items_Done />
+        <DevDashboard.Components.ToDoSection Header="All" Items=Items_All />
+    </div>
 }

@@ -4,7 +4,7 @@
     "task": "Plan Some Meeting",
     "owner": "Geneva Vang",
     "DateDue": "2019-11-10T11:37:05 +06:00",
-    "status": "Approved",
+    "status": "To Do",
     "comments": "Non incididunt irure sint anim ullamco incididunt ullamco Lorem. Eu ullamco culpa nostrud irure aliqua sunt est eiusmod pariatur dolore nostrud id aliquip anim. Minim nulla nulla consequat officia pariatur laborum cillum magna sunt est consectetur anim. Dolore laborum enim voluptate nisi occaecat amet ipsum in commodo. Deserunt sit quis ullamco velit. Quis deserunt esse sit proident id consectetur elit non quis labore proident dolor.\r\n"
   },
   {
@@ -12,7 +12,7 @@
     "task": "Look into Some Problem",
     "owner": "Cain Boyle",
     "DateDue": "2021-12-07T03:43:23 +06:00",
-    "status": "Released",
+    "status": "Done",
     "comments": "Pariatur laboris id dolor commodo. Mollit mollit in ad laborum tempor in. Incididunt do qui id ad et velit voluptate aute occaecat. Aliqua exercitation ut eiusmod esse laboris laboris. Incididunt voluptate sunt incididunt veniam sint consectetur officia eu nulla voluptate amet nisi sint. Pariatur mollit consectetur duis ea consectetur eiusmod.\r\n"
   },
   {
@@ -20,7 +20,7 @@
     "task": "Reach out to Some Person",
     "owner": "Tessa Blake",
     "DateDue": "2021-12-06T06:23:39 +06:00",
-    "status": "Approved",
+    "status": "In Progress",
     "comments": "Culpa veniam in adipisicing do incididunt consequat adipisicing dolor. Est Lorem elit commodo pariatur dolor cupidatat magna proident quis aliquip qui veniam veniam. Officia laboris irure commodo duis ad qui non laborum qui aute esse. Fugiat laborum velit mollit est officia mollit dolore aliqua. Labore culpa elit cupidatat fugiat pariatur consectetur aliquip ex sint fugiat fugiat anim.\r\n"
   },
   {
@@ -28,7 +28,7 @@
     "task": "Plan Some Meeting",
     "owner": "Audrey James",
     "DateDue": "2021-06-17T05:48:40 +05:00",
-    "status": "Released",
+    "status": "Done",
     "comments": "Ut non esse quis exercitation elit in. Voluptate aute elit et laborum eu tempor id reprehenderit. Non adipisicing do cupidatat anim veniam cillum. Fugiat enim nisi sit eu officia cupidatat pariatur exercitation deserunt sint id. Consequat id magna voluptate aute elit anim sunt eu excepteur nostrud cupidatat mollit mollit. Commodo laboris culpa ipsum et aute aliquip amet cillum consectetur cupidatat. Laboris proident voluptate id irure cillum commodo ad est commodo velit eu deserunt.\r\n"
   },
   {
@@ -36,7 +36,7 @@
     "task": "Plan Some Meeting",
     "owner": "Walton Fischer",
     "DateDue": "2019-10-01T10:03:39 +05:00",
-    "status": "Approved",
+    "status": "In Progress",
     "comments": "Magna ad esse magna dolore voluptate magna tempor proident mollit proident qui non. Mollit dolore aute laboris officia irure. Reprehenderit officia magna officia ipsum consectetur. Aute excepteur irure minim ad tempor eiusmod veniam cupidatat proident veniam ipsum. Irure elit Lorem in ea. Cupidatat amet ad enim laborum id elit occaecat anim est.\r\n"
   },
   {
@@ -44,7 +44,7 @@
     "task": "Look into Some Problem",
     "owner": "Tami Garrett",
     "DateDue": "2015-03-19T06:04:28 +05:00",
-    "status": "Approved",
+    "status": "To Do",
     "comments": "Enim ut id minim consequat incididunt tempor ad laboris nulla. Et adipisicing incididunt sint sunt mollit sit excepteur velit anim labore consectetur. Cupidatat officia voluptate cillum anim exercitation. Ad duis laboris cillum adipisicing velit irure irure nulla fugiat excepteur cillum. Consectetur Lorem exercitation et ipsum qui officia culpa sit aliquip deserunt quis consectetur id. Fugiat dolore minim qui est ullamco ad duis non nulla qui adipisicing sunt duis labore. Magna Lorem dolor eu in irure est irure aliqua.\r\n"
   },
   {
@@ -52,7 +52,15 @@
     "task": "Reach out to Some Person",
     "owner": "Clare Orr",
     "DateDue": "2017-01-11T11:29:16 +06:00",
-    "status": "Approved",
+    "status": "In Progress",
+    "comments": "Laboris veniam velit aliqua exercitation sunt adipisicing ullamco nostrud mollit incididunt. Cillum aliqua fugiat tempor enim sit ad proident culpa enim aliquip. Nostrud veniam cillum cillum sint deserunt ullamco deserunt sunt proident est officia sunt. Consectetur occaecat in pariatur duis sint enim nulla ut eiusmod reprehenderit sunt aliquip. Consequat fugiat incididunt Lorem dolor do aliqua qui non sit sunt ad cupidatat occaecat. Est tempor esse duis esse laboris quis in.\r\n"
+  },
+  {
+    "id": 7,
+    "task": "Reach out to Some Person",
+    "owner": "Clare Orr",
+    "DateDue": "2017-01-11T11:29:16 +06:00",
+    "status": "In Progress",
     "comments": "Laboris veniam velit aliqua exercitation sunt adipisicing ullamco nostrud mollit incididunt. Cillum aliqua fugiat tempor enim sit ad proident culpa enim aliquip. Nostrud veniam cillum cillum sint deserunt ullamco deserunt sunt proident est officia sunt. Consectetur occaecat in pariatur duis sint enim nulla ut eiusmod reprehenderit sunt aliquip. Consequat fugiat incididunt Lorem dolor do aliqua qui non sit sunt ad cupidatat occaecat. Est tempor esse duis esse laboris quis in.\r\n"
   }
 ]

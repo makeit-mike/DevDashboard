@@ -209,3 +209,57 @@ app {
         margin-left: 0;
     }
 }
+
+/* To Do */
+
+.ToDoContainer {
+    display: flex;
+    justify-content: space-between;
+    justify-content: space-around;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.ToDoBlock {
+    width: 300px;
+    background: gray;
+    padding-right: 50px;
+    overflow-y: auto;
+    border-radius: 5px;
+}
+
+.ToDoHr {
+    color: white;
+    text-align: center;
+    width: 299px;
+    font-size: 1.5rem;
+}
+
+.ToDoPanel {
+    margin-top: 4px;
+    margin-left:5px;
+    margin-bottom: -18px;
+    color: white;
+    width: 290px;
+    height: 100px;
+    background: #ababab;
+    border-radius: 4px;
+}
+
+.ToDoHeader {
+    background: #999999;
+    border-radius: 4px 4px 0 0;
+    height: 30px;
+}
+
+.ToDoBody {
+    width: 190px;
+    margin-left: 4px;
+    height: 38px;
+    border-radius: 2px;
+}
+
+.ToDoText{
+    padding-left: 10px;
+    padding-top: 5px;
+}
