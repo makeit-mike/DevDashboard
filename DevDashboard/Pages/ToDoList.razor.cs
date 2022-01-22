@@ -7,16 +7,16 @@ namespace DevDashboard.Pages
     public partial class ToDoList : ComponentBase
     {
         public enum ToDoStatus { Open, Complete, Withdrawn }
-        private ToDoItem[]? Items_All, Items_ToDo, Items_InProg, Items_Done;
+        private IEnumerable<ToDoItem>? Items_All, Items_ToDo, Items_InProg, Items_Done;
 
         protected override async Task OnInitializedAsync()
         {
             Items_All = await Http.GetFromJsonAsync<ToDoItem[]>("sample-data/todoItems.json");
             if (Items_All is null) { return; }
 
-            Items_ToDo = Items_All.Where(x => x.Status == "To Do").ToArray();
-            Items_InProg = Items_All.Where(x => x.Status == "In Progress").ToArray();
-            Items_Done = Items_All.Where(x => x.Status == "Done").ToArray();
+            Items_ToDo = Items_All.Where(x => x.Status == "To Do");
+            Items_InProg = Items_All.Where(x => x.Status == "In Progress");
+            Items_Done = Items_All.Where(x => x.Status == "Done");
         }
 
         public void AddToDoItem()

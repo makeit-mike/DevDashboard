@@ -19,7 +19,7 @@
 
 @code {
     [Parameter]
-    public ToDoItem[] Items { get; set; }
+    public IEnumerable<ToDoItem> Items { get; set; }
 
     [Parameter]
     public string Header { get; set; }
